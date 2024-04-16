@@ -17,7 +17,8 @@ PCQDA_result<-function(x,y){
   model_PCQDA<-subset(data_PCQDA,select=-c(Cluster))
   PCQDA_df<-scale(model_PCQDA)
   PCQDA_df.pca <- prcomp(PCQDA_df)
-  PCQDA_df2<-data.frame(Cluster=data_PCQDA$Cluster, PCQDA_df.pca$x)
+  PCQDA_pca<- PCQDA_df.pca$x[,1:2]
+  PCQDA_df2<-data.frame(Cluster=data_PCQDA$Cluster, PCQDA_pca)
   PCQDA<-MASS::qda(Cluster~.,data=PCQDA_df2)
   whole_raw<-molaR::DNE(x,BoundaryDiscard='None')
   whole_DED<-data.frame(whole_raw$Face_Values)
@@ -40,7 +41,7 @@ PCQDA_result<-function(x,y){
   PCQDA_scale_Bind<-scale(PCQDA_Bind)
   PCQDA_Bind_est.pca.x <- as.matrix(PCQDA_scale_Bind) %*% PCQDA_df.pca$rotation
   PCQDA_Bind_est<-data.frame(PCQDA_Bind_est.pca.x)
-  PCQDA_est <- PCQDA_Bind_est[-710:-2,]
+  PCQDA_est <- PCQDA_Bind_est[1,1:2]
   PCQDA_pred<-predict(PCQDA, PCQDA_est,type="class")
   PCQDA_Estimated <- PCQDA_pred$class
   PCQDA_result<-data.frame(PCQDA_Estimated)

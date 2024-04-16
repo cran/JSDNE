@@ -5,13 +5,13 @@
 \alias{data_PCR}
 \title{Database to create DNE_PCR method}
 \format{
-An object of class \code{data.frame} with 539 rows and 8 columns.
+An object of class \code{data.frame} with 558 rows and 6 columns.
 }
 \usage{
 data_PCR
 }
 \description{
-data_PCR with 8 variables: Age, Median value of DNE on Apex, IQR of DNE on Apex, Mean value of DNE on Convex surface, Mean value of DNE on Concave surface, Proportion having DNE under 0.0001, Proportion having DNE over 0.6, Median value of DNE on Whole surface
+data_PCR with 6 variables: Age,Total DNE/Total Polygon Faces, Mean value of DNE on Apex, IQR of DNE on Apex, Mean value of DNE on Convex surface, Proportion having DNE under 0.0001
 }
 \details{
 The database was obtained by calculating the DNE on the auricular surface from European collections.

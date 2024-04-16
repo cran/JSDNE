@@ -5,7 +5,7 @@
 \alias{data_PCQDA}
 \title{Databases to create DNE_PCQDA method.}
 \format{
-An object of class \code{data.frame} with 709 rows and 5 columns.
+An object of class \code{data.frame} with 728 rows and 5 columns.
 }
 \usage{
 data_PCQDA

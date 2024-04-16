@@ -5,7 +5,7 @@
 \alias{data_PCLR}
 \title{Database to create DNE_PCLR method}
 \format{
-An object of class \code{data.frame} with 682 rows and 6 columns.
+An object of class \code{data.frame} with 716 rows and 6 columns.
 }
 \usage{
 data_PCLR

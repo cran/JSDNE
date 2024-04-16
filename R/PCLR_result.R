@@ -16,7 +16,8 @@ PCLR_result<-function(x,y){
   model_PCLR<-subset(data_PCLR,select=-c(Cluster))
   PCLR_df<-scale(model_PCLR)
   PCLR_df.pca <- prcomp(PCLR_df)
-  PCLR_df2<-data.frame(Cluster=data_PCLR$Cluster, PCLR_df.pca$x)
+  PCLR_pca<-PCLR_df.pca$x[,1:2]
+  PCLR_df2<-data.frame(Cluster=data_PCLR$Cluster, PCLR_pca)
   PCLR<-nnet::multinom(Cluster~.,data=PCLR_df2)
   whole_raw<-molaR::DNE(x,BoundaryDiscard='None')
   whole_DED<-data.frame(whole_raw$Face_Values)
@@ -31,12 +32,12 @@ PCLR_result<-function(x,y){
   IQRDNE.Whole<-IQR(df_whole_DNE$whole_DNE)
   MeanDNE.Convex<-whole_raw$Convex_DNE/nrow(whole_DED[whole_DED$Kappa_Values>0,])
   MeanDNE.Apex<-mean(df_apex_DNE$apex_DNE)
-  est_PCLR<-data.frame(TotalDNE.TotalPolygonFaces, MedianDNE.Whole, IQRDNE.Whole, MeanDNE.Convex, MeanDNE.Apex)
+  est_PCLR<-data.frame(TotalDNE.TotalPolygonFaces, MeanDNE.Apex, MeanDNE.Convex, MedianDNE.Whole, IQRDNE.Whole)
   PCLR_Bind<-rbind(est_PCLR, model_PCLR)
   PCLR_scale_Bind<-scale(PCLR_Bind)
   PCLR_Bind_est.pca.x <- as.matrix(PCLR_scale_Bind) %*% PCLR_df.pca$rotation
   PCLR_Bind_est<-data.frame(PCLR_Bind_est.pca.x)
-  PCLR_est <- PCLR_Bind_est [-683:-2,]
+  PCLR_est <- PCLR_Bind_est [1,1:2]
   PCLR_pred<-predict(PCLR,PCLR_est,type="class")
   PCLR_result<-data.frame(PCLR_pred)
   PCLR_result<-dplyr::mutate(PCLR_result, Age= dplyr::case_when(PCLR_pred == 1 ~ 'Under 67', PCLR_pred == 2 ~ 'Over 63', TRUE~'x'))

@@ -15,7 +15,8 @@ PCR_result<-function(x,y){
   model_PCR<-subset(data_PCR,select=-c(Age))
   PCR_df<-scale(model_PCR)
   PCR_df.pca <- prcomp(PCR_df)
-  PCR_df2<-data.frame(Age=data_PCR$Age, PCR_df.pca$x)
+  PCR_pca<-PCR_df.pca$x[,1:2]
+  PCR_df2<-data.frame(Age=data_PCR$Age, PCR_pca)
   PCR <-lm(Age~., data = PCR_df2)
   whole_raw<-molaR::DNE(x,BoundaryDiscard='None')
   whole_DED<-data.frame(whole_raw$Face_Values)
@@ -25,27 +26,23 @@ PCR_result<-function(x,y){
   apex_DED<-data.frame(apex_raw$Face_Values)
   apex_DNE<-apex_DED$Dirichlet_Energy_Densities*apex_DED$Face_Areas
   df_apex_DNE<-data.frame(apex_DNE)
-  MedianDNE.Apex<-median(df_apex_DNE$apex_DNE)
+  TotalDNE.TotalPolygonFaces<-mean(df_whole_DNE$whole_DNE)
+  MeanDNE.Apex<-mean(df_apex_DNE$apex_DNE)
   IQRDNE.Apex<-IQR(df_apex_DNE$apex_DNE)
   MeanDNE.Convex<-whole_raw$Convex_DNE/nrow(whole_DED[whole_DED$Kappa_Values>0,])
-  MeanDNE.Concave<-whole_raw$Concave_DNE/nrow(whole_DED[whole_DED$Kappa_Values<0,])
   Fine<-df_whole_DNE[df_whole_DNE$whole_DNE<=0.0001,]
-  Macro<- df_whole_DNE[df_whole_DNE$whole_DNE>0.6,]
   df_fine<-data.frame(Fine)
-  df_macro<-data.frame(Macro)
   Proportion.DNEunder0.0001<-nrow(df_fine)/nrow(df_whole_DNE)
-  Proportion.DNEover0.6<- nrow(df_macro)/nrow(df_whole_DNE)
-  MedianDNE.Whole<-median(df_whole_DNE$whole_DNE)
-  est_PCR<-data.frame(MedianDNE.Apex, IQRDNE.Apex, MeanDNE.Convex, MeanDNE.Concave, Proportion.DNEunder0.0001, Proportion.DNEover0.6, MedianDNE.Whole)
+  est_PCR<-data.frame(TotalDNE.TotalPolygonFaces, MeanDNE.Apex, IQRDNE.Apex, MeanDNE.Convex, Proportion.DNEunder0.0001)
   PCR_Bind<-rbind(est_PCR,model_PCR)
   PCR_scale_Bind<-scale(PCR_Bind)
   PCR_Bind_est.pca.x <- as.matrix(PCR_scale_Bind) %*% PCR_df.pca$rotation
-  PCR_Bind_est<-data.frame(PCR_Bind_est.pca.x)
-  PCR_est <- PCR_Bind_est[-540:-2,]
+  PCR_est_df<- PCR_Bind_est.pca.x[1,1:2]
+  PCR_est<-data.frame(t(PCR_est_df))
   PCR_pred<-predict(PCR, PCR_est)
   PCR_result<-data.frame(PCR_pred)
   names(PCR_result)<-c("Estimated age")
-  PCR_result[,"SE"]<-c("12.4yrs")
+  PCR_result[,"SE"]<-c("12.58yrs")
   PCR_result
 }
 
