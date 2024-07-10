@@ -13,11 +13,11 @@
 #' @export
 
 PCLR_result<-function(x,y){
-  model_PCLR<-subset(data_PCLR,select=-c(Cluster))
+  model_PCLR<-subset(PCLR_Train,select=-c(Cluster1,Age))
   PCLR_df<-scale(model_PCLR)
   PCLR_df.pca <- prcomp(PCLR_df)
   PCLR_pca<-PCLR_df.pca$x[,1:2]
-  PCLR_df2<-data.frame(Cluster=data_PCLR$Cluster, PCLR_pca)
+  PCLR_df2<-data.frame(Cluster=PCLR_Train$Cluster1, PCLR_pca)
   PCLR<-nnet::multinom(Cluster~.,data=PCLR_df2)
   whole_raw<-molaR::DNE(x,BoundaryDiscard='None')
   whole_DED<-data.frame(whole_raw$Face_Values)

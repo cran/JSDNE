@@ -14,11 +14,11 @@
 #' @export
 
 PCQDA_result<-function(x,y){
-  model_PCQDA<-subset(data_PCQDA,select=-c(Cluster))
+  model_PCQDA<-subset(PCQDA_Train,select=-c(Cluster2,Age))
   PCQDA_df<-scale(model_PCQDA)
   PCQDA_df.pca <- prcomp(PCQDA_df)
   PCQDA_pca<- PCQDA_df.pca$x[,1:2]
-  PCQDA_df2<-data.frame(Cluster=data_PCQDA$Cluster, PCQDA_pca)
+  PCQDA_df2<-data.frame(Cluster=PCQDA_Train$Cluster2, PCQDA_pca)
   PCQDA<-MASS::qda(Cluster~.,data=PCQDA_df2)
   whole_raw<-molaR::DNE(x,BoundaryDiscard='None')
   whole_DED<-data.frame(whole_raw$Face_Values)
@@ -45,7 +45,7 @@ PCQDA_result<-function(x,y){
   PCQDA_pred<-predict(PCQDA, PCQDA_est,type="class")
   PCQDA_Estimated <- PCQDA_pred$class
   PCQDA_result<-data.frame(PCQDA_Estimated)
-  PCQDA_result<-dplyr::mutate(PCQDA_result, Age= dplyr::case_when(PCQDA_Estimated == 1 ~ '20-54', PCQDA_Estimated == 2 ~ '31-74', PCQDA_Estimated == 3 ~ '63-93', PCQDA_Estimated == 4~ 'Over 77', TRUE~'x'))
+  PCQDA_result<-dplyr::mutate(PCQDA_result, Age= dplyr::case_when(PCQDA_Estimated == 1 ~ '20-44', PCQDA_Estimated == 2 ~ '31-74', PCQDA_Estimated == 3 ~ '63-93', PCQDA_Estimated == 4~ 'Over 76', TRUE~'x'))
   names(PCQDA_result)<-c("Estimated age group","Estimated age range")
   PCQDA_result
 }

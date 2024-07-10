@@ -7,3 +7,15 @@ knitr::opts_chunk$set(
 ## ----setup--------------------------------------------------------------------
 library(JSDNE)
 
+## -----------------------------------------------------------------------------
+library(JSDNE)
+PCQDA_output <- PCQDA_result(WholeSurface, Apex)
+
+## -----------------------------------------------------------------------------
+library(JSDNE)
+PCR_output <- PCR_result(WholeSurface, Apex)
+
+## -----------------------------------------------------------------------------
+library(JSDNE)
+PCR_output <- PCR_result(WholeSurface, Apex)
+

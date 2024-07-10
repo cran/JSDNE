@@ -12,11 +12,11 @@
 #' @export
 
 PCR_result<-function(x,y){
-  model_PCR<-subset(data_PCR,select=-c(Age))
+  model_PCR<-subset(PCR_Train,select=-c(Age))
   PCR_df<-scale(model_PCR)
   PCR_df.pca <- prcomp(PCR_df)
   PCR_pca<-PCR_df.pca$x[,1:2]
-  PCR_df2<-data.frame(Age=data_PCR$Age, PCR_pca)
+  PCR_df2<-data.frame(Age=PCR_Train$Age, PCR_pca)
   PCR <-lm(Age~., data = PCR_df2)
   whole_raw<-molaR::DNE(x,BoundaryDiscard='None')
   whole_DED<-data.frame(whole_raw$Face_Values)
@@ -42,7 +42,7 @@ PCR_result<-function(x,y){
   PCR_pred<-predict(PCR, PCR_est)
   PCR_result<-data.frame(PCR_pred)
   names(PCR_result)<-c("Estimated age")
-  PCR_result[,"SE"]<-c("12.58yrs")
+  PCR_result[,"SE"]<-c("8.8yrs")
   PCR_result
 }
 
