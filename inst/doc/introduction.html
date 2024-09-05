@@ -341,7 +341,8 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(JSDNE)</span></code></pre></div>
-<p>###Abstract</p>
+<div id="abstract" class="section level3">
+<h3>Abstract</h3>
 <p>Age estimation plays a significant role in forensic anthropology and
 bioarchaeology. However, widely-used traditional methods involving
 macroscopic observation suffer from subjectivity and statistical bias.
@@ -359,15 +360,15 @@ novel R package, JSDNE. The package predicts age mathematically,
 objectively, and user-independently. It includes three functions:
 principal component quadratic discriminant analysis (PCQDA), principal
 component regression analysis (PCR), and principal component logistic
-regression analysis (PCLR), which produce age estimates with 91%, 91%,
+regression analysis (PCLR), which produce age estimates with 91%, 76%,
 and 92.9% levels of accuracy, respectively. JSDNE package (<a href="https://cran.r-project.org/package=JSDNE" class="uri">https://cran.r-project.org/package=JSDNE</a>) can be
-downloaded automatically using install.packages(“JSDNE”). The user will
-obtain the estimated results in a few seconds.It is important to note
-when using this package that the inputted whole surface and the inputted
-apex must be written in location of x and y, respectively. The detailed
-source code can be downloaded in <a href="https://github.com/jisunjang19/cran-JSDNE" class="uri">https://github.com/jisunjang19/cran-JSDNE</a> and Doi:
+downloaded automatically using install.packages(“JSDNE”). The detailed
+code and the raw data developed the findings of this study are openly
+available at <a href="https://github.com/jisunjang19/cran-JSDNE" class="uri">https://github.com/jisunjang19/cran-JSDNE</a> or doi:
 10.5281/zenodo.12708779.</p>
-<p>###Introduction</p>
+</div>
+<div id="introduction" class="section level3">
+<h3>Introduction</h3>
 <p>Age estimation, together with sex and stature estimation, is crucial
 in constructing the biological profile of human remains. In
 bioarchaeology, the biological profile is the foundation for
@@ -468,14 +469,14 @@ how much the surface bends, which it does by quantifying the deviation
 of surface energy from a stable state, which is 0 or flat. Each polygon
 face (ρ) has two principal curvatures: the largest curvature (v) and the
 smallest curvature (υ), and the points at which these meet are called
-vertices. Each vertex has a normal, which is the average value of the
-adjacent polygonal normal vectors. A polygon is formed by translating
-the normal vectors to a common vertex. This polygon has edge vectors (nν
-and nυ), which are derivatives of v and υ (Bunn et al., 2011; Pampush et
-al., 2016; Winchester, 2016). The Dirichlet Energy Density (DED) is
-obtained from the sum of square roots of edge vectors. Then, DNE is
-calculated as the total sum of the values multiplied by DNE and area
-(Pampush et al., 2016:398):</p>
+vertices (Figure 1). Each vertex has a normal (red arrow), which is the
+average value of the adjacent polygonal normal vectors (blue arrows). A
+polygon is formed by translating the normal vectors to a common vertex.
+This polygon has edge vectors (nν and nυ), which are derivatives of v
+and υ (Bunn et al., 2011; Pampush et al., 2016; Winchester, 2016). The
+Dirichlet Energy Density (DED) is obtained from the sum of square roots
+of edge vectors. Then, DNE is calculated as the total sum of the values
+multiplied by DNE and area (Pampush et al., 2016:398):</p>
 <p><span class="math display">\[DED(\rho)=(n_v)^2(n_u)^2\]</span> <span class="math display">\[DNE=\sum DED(\rho) \times area(\rho)\]</span></p>
 <p>This makes it possible to identify subtle changes in surface
 curvature more sensitively than other methods of curvature analysis
@@ -511,19 +512,26 @@ discriminant analysis (PCQDA), principal component regression analysis
 (PCR), and principal component logistic regression analysis (PCLR). The
 results have been used to develop an R package, JSDNE, which can be used
 to estimate age-at-death in unknown individuals.</p>
-<p>###Datasets in the JSDNE package</p>
+</div>
+<div id="datasets-in-the-jsdne-package" class="section level3">
+<h3>Datasets in the JSDNE package</h3>
 <p>JSDNE package includes seven datasets: RawData, PCQDA_Train,
 PCQDA_Test, PCR_Train, PCR_Test, PCLR_Train, PCLR_Test.</p>
-<p>####‘RawData’ RawData offers the raw information of DNE variables and
-biological information of auricular surfaces (age and sex). It consists
-of Age, Cluster1, Cluster2, Collection, Sex, MeanDNE.Apex,
-MedianDNE.Apex, IQRDNE.Apex, TotalDNE.TotalPolygonFaces,
-MedianDNE.Whole, IQRDNE.Whole, MeanDNE.Convex, MeanDNE.Concave,
-Proportion.DNEunder0.0001 and Proportion.DNEover0.6. Cluster1 and
-Cluster2 is the clustering information for PCLR and PCQDA, respectively.
-The number of rows is 890.</p>
-<p>####‘PCQDA_Train’ PCQDA_Train is the train set of the PCQDA model. It
-consists of Cluster2, Age, MeanDNE.Apex, TotalDNE.TotalPolygonFaces,
+<div id="rawdata" class="section level4">
+<h4>‘RawData’</h4>
+<p>RawData offers the raw information of DNE variables and biological
+information of auricular surfaces (age and sex). It consists of Age,
+Cluster1, Cluster2, Collection, Sex, MeanDNE.Apex, MedianDNE.Apex,
+IQRDNE.Apex, TotalDNE.TotalPolygonFaces, MedianDNE.Whole, IQRDNE.Whole,
+MeanDNE.Convex, MeanDNE.Concave, Proportion.DNEunder0.0001 and
+Proportion.DNEover0.6. Cluster1 and Cluster2 is the clustering
+information for PCLR and PCQDA, respectively. The number of rows is
+890.</p>
+</div>
+<div id="pcqda_train" class="section level4">
+<h4>‘PCQDA_Train’</h4>
+<p>PCQDA_Train is the train set of the PCQDA model. It consists of
+Cluster2, Age, MeanDNE.Apex, TotalDNE.TotalPolygonFaces,
 Proportion.DNEunder0.0001, and Proportion.DNEover0.6. The number of rows
 is 704. This dataset is also used to calculate the Accuracy (ACC), Bias,
 Average Absolute Deviation (AAD) with PCQDA method. The followed code is
@@ -532,42 +540,60 @@ used to create PCQDA_Train and PCQDA_Test.</p>
 sample &lt;- sample(c(TRUE, FALSE), nrow(PCQDA_data), replace=TRUE, prob=c(0.8,0.2))
 PCQDA_Train &lt;- PCQDA_data[sample, ]
 PCQDA_Test &lt;- PCQDA_data[!sample, ]</code></pre>
-<p>####‘PCQDA_Test’ PCQDA_Test is the test set of the PCQDA model. It
-consists of Cluster2, Age, MeanDNE.Apex, TotalDNE.TotalPolygonFaces,
+</div>
+<div id="pcqda_test" class="section level4">
+<h4>‘PCQDA_Test’</h4>
+<p>PCQDA_Test is the test set of the PCQDA model. It consists of
+Cluster2, Age, MeanDNE.Apex, TotalDNE.TotalPolygonFaces,
 Proportion.DNEunder0.0001, and Proportion.DNEover0.6. The number of rows
 is 186. This dataset is also used to calculate the Accuracy (ACC), Bias,
 Average Absolute Deviation (AAD) with PCQDA method.</p>
-<p>####‘PCR_Train’ PCR_Train is the train set of the PCR model. It
-consists of Age, MeanDNE.Apex, IQRDNE.Apex, TotalDNE.TotalPolygonFaces,
-MeanDNE.Convex and Proportion.DNEunder0.0001. The number of rows is 702.
-This dataset is also used to calculate the Accuracy (ACC), Bias, Average
-Absolute Deviation (AAD) with PCR method. The followed code is used to
-create PCR_Train and PCR_Test.</p>
+</div>
+<div id="pcr_train" class="section level4">
+<h4>‘PCR_Train’</h4>
+<p>PCR_Train is the train set of the PCR model. It consists of Age,
+MeanDNE.Apex, IQRDNE.Apex, TotalDNE.TotalPolygonFaces, MeanDNE.Convex
+and Proportion.DNEunder0.0001. The number of rows is 702. This dataset
+is also used to calculate the Accuracy (ACC), Bias, Average Absolute
+Deviation (AAD) with PCR method. The followed code is used to create
+PCR_Train and PCR_Test.</p>
 <pre><code>PCR_data&lt;-subset(RawData,select=c(Age, MeanDNE.Apex, IQRDNE.Apex, TotalDNE.TotalPolygonFaces, MeanDNE.Convex, Proportion.DNEunder0.0001))
 sample &lt;- sample(c(TRUE, FALSE), nrow(PCR_data), replace=TRUE, prob=c(0.8,0.2))
 PCR_Train &lt;- PCR_data[sample, ]
 PCR_Test &lt;- PCR_data[!sample, ]</code></pre>
-<p>####‘PCR_Test’ PCR_Test is the test set of the PCR model. It consists
-of Age, MeanDNE.Apex, IQRDNE.Apex, TotalDNE.TotalPolygonFaces,
-MeanDNE.Convex and Proportion.DNEunder0.0001. The number of rows is 188.
-This dataset is also used to calculate the Accuracy (ACC), Bias, Average
-Absolute Deviation (AAD) with PCR method.</p>
-<p>####‘PCLR_Train’ PCLR_Train is the train set of the PCR model. It
-consists of Age, Cluster1, MeanDNE.Apex, TotalDNE.TotalPolygonFaces,
-MedianDNE.Whole, IQRDNE.Whole and MeanDNE.Convex. The number of rows is
-699. This dataset is also used to calculate the Accuracy (ACC), Bias,
-Average Absolute Deviation (AAD) with PCLR method. The followed code is
-used to create PCR_Train and PCR_Test.</p>
+</div>
+<div id="pcr_test" class="section level4">
+<h4>‘PCR_Test’</h4>
+<p>PCR_Test is the test set of the PCR model. It consists of Age,
+MeanDNE.Apex, IQRDNE.Apex, TotalDNE.TotalPolygonFaces, MeanDNE.Convex
+and Proportion.DNEunder0.0001. The number of rows is 188. This dataset
+is also used to calculate the Accuracy (ACC), Bias, Average Absolute
+Deviation (AAD) with PCR method.</p>
+</div>
+<div id="pclr_train" class="section level4">
+<h4>‘PCLR_Train’</h4>
+<p>PCLR_Train is the train set of the PCR model. It consists of Age,
+Cluster1, MeanDNE.Apex, TotalDNE.TotalPolygonFaces, MedianDNE.Whole,
+IQRDNE.Whole and MeanDNE.Convex. The number of rows is 699. This dataset
+is also used to calculate the Accuracy (ACC), Bias, Average Absolute
+Deviation (AAD) with PCLR method. The followed code is used to create
+PCR_Train and PCR_Test.</p>
 <pre><code>PCLR_data&lt;-subset(RawData,select=c(Age, Cluster1, MeanDNE.Apex, TotalDNE.TotalPolygonFaces, MedianDNE.Whole, IQRDNE.Whole, MeanDNE.Convex))
 sample &lt;- sample(c(TRUE, FALSE), nrow(PCLR_data), replace=TRUE, prob=c(0.8,0.2))
 PCLR_Train &lt;- PCLR_data[sample, ]
 PCLR_Test &lt;- PCLR_data[!sample, ]</code></pre>
-<p>####‘PCLR_Test’ PCLR_Test is the test set of the PCR model. It
-consists of Age, Cluster1, MeanDNE.Apex, TotalDNE.TotalPolygonFaces,
-MedianDNE.Whole, IQRDNE.Whole and MeanDNE.Convex. The number of rows is
-191. This dataset is also used to calculate the Accuracy (ACC), Bias,
-Average Absolute Deviation (AAD) with PCLR method.</p>
-<p>###Materials</p>
+</div>
+<div id="pclr_test" class="section level4">
+<h4>‘PCLR_Test’</h4>
+<p>PCLR_Test is the test set of the PCR model. It consists of Age,
+Cluster1, MeanDNE.Apex, TotalDNE.TotalPolygonFaces, MedianDNE.Whole,
+IQRDNE.Whole and MeanDNE.Convex. The number of rows is 191. This dataset
+is also used to calculate the Accuracy (ACC), Bias, Average Absolute
+Deviation (AAD) with PCLR method.</p>
+</div>
+</div>
+<div id="materials" class="section level3">
+<h3>Materials</h3>
 <p>Data for the current study was collected from three European
 anatomical skeletal collections; the Luís Lopes Skeletal Collection, the
 21st Century Identified Skeletal Collection, and the CAL Milano Cemetery
@@ -597,7 +623,9 @@ current research consists of 890 (402 females, 488 males) adult
 individuals with a known age-at-death from these three collections. All
 890 individuals had fully preserved auricular surfaces that displayed no
 taphonomic damage or pathological conditions.</p>
-<p>###Methods</p>
+</div>
+<div id="methods" class="section level3">
+<h3>Methods</h3>
 <p>Preparation and importing of reconstructed models Auricular surfaces
 were scanned using an EXScan SP laser scanner (resolution: 1.3
 megapixels). Each surface was scanned from a minimum of five different
@@ -633,7 +661,9 @@ phase 4 (over 76) The PCR function provides an output of estimated age
 in years and the standard error (8.8yrs). The PCLR function also assigns
 an individual to a broad age range, but with a more limited range of
 under 67 years (phase 1) or over 63 years (phase 2).</p>
-<p>###Results</p>
+</div>
+<div id="results" class="section level3">
+<h3>Results</h3>
 <p>Age-related variables Initial analyses identified ten DNE variables
 that were highly correlated with age-at-death in the known-age sample
 (Table 3 and Figure 3). Nine of these variables (total DNE per total
@@ -676,12 +706,14 @@ respectively. Thus, the first and second principal components were used
 as variables. Then, the statistical models were developed using
 cross-validation. The training and test sets contained 80% and 20% of
 the data set randomly.</p>
-<p>###Accuracy, bias, and the average absolute deviation</p>
-<p>PCQDA The training set, test set, and combined set showed similar
-results. Accordingly, the results were described based on the combined
-set. Accuracy was defined as JSDNE age estimates that fell within the
-age phase that contained the known age-at-death. Bias was calculated as
-the mean value of the subtracted values between the mean age of the
+</div>
+<div id="accuracy-bias-and-the-average-absolute-deviation" class="section level3">
+<h3>Accuracy, bias, and the average absolute deviation</h3>
+<p>The training set, test set, and combined set showed similar results.
+Accordingly, the results were described based on the combined set.
+Accuracy was defined as JSDNE age estimates that fell within the age
+phase that contained the known age-at-death. Bias was calculated as the
+mean value of the subtracted values between the mean age of the
 estimated age phase and the known age at death. The average absolute
 deviation (AAD) was the mean value of the absolute values subtracted
 between the mean age of the estimated age phase and the known age at
@@ -689,52 +721,60 @@ death:</p>
 <p><span class="math display">\[Bias=\sum(mean \ age \ of \ the \
 estimated \ age \ phase - known \ age \ at \ death)/N\]</span> <span class="math display">\[AAD=\sum|mean \ age \ of \ the \ estimated \ age
 \ phase - known \ age \ at \ death|/N\]</span></p>
-<p>###Summary of the Results of PCQDA model</p>
+</div>
+<div id="summary-of-the-results-of-pcqda-model" class="section level3">
+<h3>Summary of the Results of PCQDA model</h3>
 <p>The total accuracy and the average absolute deviation (AAD) are 91%
-and 9.58 years, respectively. This demonstrates that the PCQDA function
-estimates age with a high level of accuracy and precision. Phase 2,
-which estimated individuals to be over 31 and under 74 years of age, had
-the lowest accuracy (88.8%) and the highest AAD (11.52 years). The
-highest accuracy and the lowest AAD were shown in phase 1 (20-44 years
-of age), with 97.8% and 5.53 years, respectively. While the cluster
-analysis identified this four-phase grouping system as the best fit for
-the prediction model, levels of accuracy were also examined using
-10-year age intervals, in order to compare the relative applicability of
-each of the functions across age cohorts. This showed that there was a
-tendency to underestimate the age of older individuals (those in their
-60s and older) and overestimate the age of younger and middle aged
-individuals (in their 50s and younger). Individuals in their 20s were
-estimated with the lowest level of accuracy (65.9%). The highest AAD
-(94.9 years) was in their 30s. The highest accuracy levels were seen for
-individuals estimated to be in their 40s (98.2%).</p>
-<p>###Summary of the Results of PCR model</p>
+and 9.58 years, respectively (Table 6). This demonstrates that the PCQDA
+function estimates age with a high level of accuracy and precision.
+Phase 2, which estimated individuals to be over 31 and under 74 years of
+age, had the lowest accuracy (88.8%) and the highest AAD (11.52 years).
+The highest accuracy and the lowest AAD were shown in phase 1 (20-44
+years of age), with 97.8% and 5.53 years, respectively. While the
+cluster analysis identified this four-phase grouping system as the best
+fit for the prediction model, levels of accuracy were also examined
+using 10-year age intervals (Table 7), in order to compare the relative
+applicability of each of the functions across age cohorts. This showed
+that there was a tendency to underestimate the age of older individuals
+(those in their 60s and older) and overestimate the age of younger and
+middle aged individuals (in their 50s and younger). Individuals in their
+20s were estimated with the lowest level of accuracy (65.9%). The
+highest AAD (94.9 years) was in their 30s. The highest accuracy levels
+were seen for individuals estimated to be in their 40s (98.2%).</p>
+</div>
+<div id="summary-of-the-results-of-pcr-model" class="section level3">
+<h3>Summary of the Results of PCR model</h3>
 <p>PCR Accuracy was defined as JSDNE age estimates that fell within the
 standard error (8.8yrs) of the known age-at-death. The total accuracy
-and ADD are 91% and 6.46 years, respectively. When collated into 10-year
-age intervals, the accuracy levels range from poor to moderate, but this
-is due to the high precision of the age estimate in the majority of
-intervals. Individuals in their 20s and over 80 were predicted with the
-lowest levels of accuracy (52.4% and 56.3%), and highest levels of AAD
-(9.37 years and 9.4 years). The highest accuracy (92.2%) was found for
-individuals estimated to be in their 50s. As with the PCQDA function,
-there was a tendency for younger and middle aged adults (those in their
-40s and younger) to be overestimated, while the age of individuals over
-50 was underestimated.</p>
-<p>###Summary of the Results of PCLR model</p>
-<p>PCLR Accuracy was defined as JSDNE age estimates that fell within the
-age phase that contained the known age-at-death. PCLR produced a high
-level of accuracy overall (92.9%), and high precision (9.93 years).
+and ADD are 76% and 6.46 years, respectively (Table 8). When collated
+into 10-year age intervals, the accuracy levels range from poor to
+moderate, but this is due to the high precision of the age estimate in
+the majority of intervals. Individuals in their 20s and over 80 were
+predicted with the lowest levels of accuracy (52.4% and 56.3%), and
+highest levels of AAD (9.37 years and 9.4 years). The highest accuracy
+(92.2%) was found for individuals estimated to be in their 50s. As with
+the PCQDA function, there was a tendency for younger and middle aged
+adults (those in their 40s and younger) to be overestimated, while the
+age of individuals over 50 was underestimated.</p>
+</div>
+<div id="summary-of-the-results-of-pclr-model" class="section level3">
+<h3>Summary of the Results of PCLR model</h3>
+<p>Accuracy was defined as JSDNE age estimates that fell within the age
+phase that contained the known age-at-death. PCLR produced a high level
+of accuracy overall (92.9%), and high precision (9.93 years) (Table 9).
 Phase 1 has higher accuracy (95.2%) than phase 2 (90.2%). However, phase
 2 has higher precision than phase 1, indicated by the lower AAD value
 (11.48 years vs. 8.09 years). When classifying individuals with 10-year
-age intervals, the highest accuracy was shown for individuals in their
-30s (100%), and the lowest accuracy for individuals in their 60s
-(80.6%). In terms of precision, individuals in 20s had the lowest
+age intervals (Table 10), the highest accuracy was shown for individuals
+in their 30s (100%), and the lowest accuracy for individuals in their
+60s (80.6%). In terms of precision, individuals in 20s had the lowest
 precision (ADD: 20.45 years), and those in their 40s had the highest
 precision (ADD: 2.68 years). Yet again, individuals under 40 years of
 age tended to be overestimated, while individuals over 40 were
 underestimated.</p>
-<p>###Discussion</p>
+</div>
+<div id="discussion" class="section level3">
+<h3>Discussion</h3>
 <p>Initial analyses involving the DNE values and known age-at-death
 revealed ten DNE variables that were highly correlated with age (Table 3
 and Figure 3). The majority of these variables had positive
@@ -775,12 +815,12 @@ surface geometry that are correlated with age, reducing the subjectivity
 and user-dependence. The JSDNE R package uses DNE variables that are
 correlated with age-at-death to estimate age for unknown auricular
 surfaces. Three functions are available; PCQDA, PCR, and PCLR. The total
-accuracy of the PCQDA function produces the highest level of accuracy
-(91%), likely a result of wide age ranges of each age phase (Millán et
-al., 2013). The PCLR function also produces a high level of accuracy
+accuracy of the PCQDA function produces a high level of accuracy (91%),
+likely a result of wide age ranges of each age phase (Millán et al.,
+2013). The PCLR function also produces the highest level of accuracy
 (92.9%), but is used to determine whether an individual is under 67 or
 over 63 years of age. The PCR function produces a narrower age range
-(SE: 8.8yrs) with the high level of accuracy (91%). These results are
+(SE: 8.8yrs) with the high level of accuracy (76%). These results are
 similar to the accuracy rates gained by the majority of researchers who
 carry out validation studies of the Buckberry and Chamberlain (94% -
 86%) and Lovejoy (63% - 27%) methods of traditional analysis (Hughes et
@@ -809,18 +849,29 @@ who are middle-aged, meaning that a wider range of variation is captured
 for the middle-aged auricular surfaces and the resulting age estimates
 are also biased towards this age group. There is currently no way to
 alleviate this problem with the known-age skeletal collections that are
-available worldwide.</p>
-<p>###Conclusion</p>
+available worldwide. However, profile likelihood analysis could be a
+good alternative to reduce the underestimation and overestimation issue
+with predicted ages, albeit with broader prediction intervals. However,
+there is no R package for profile likelihood, so this method of analysis
+would have to be performed in another statistical programme.</p>
+</div>
+<div id="conclusion" class="section level3">
+<h3>Conclusion</h3>
 <p>The present research successfully identified ten geometric variables
 of the auricular surface that were associated with known age-at-death
 and used these to create an objective, mathematical age estimation
-method that is available as a novel R package, JSDNE (<a href="https://cran.r-project.org/package=JSDNE" class="uri">https://cran.r-project.org/package=JSDNE</a>). This
-estimates age using three functions which offers the high levels of
-accuracy (91-92.9%). This method does not require a great degree of
-experience to gather and interpret the results, only familiarity with R
-studio and access to a laser scanner. Moreover, the results can be
-applied to research in bioarchaeology and forensic anthropology.</p>
-<p>###Acknowledgements</p>
+method that is available as a novel R package, JSDNE (<a href="https://cran.r-project.org/package=JSDNE" class="uri">https://cran.r-project.org/package=JSDNE</a>). The detailed
+code and the raw data developed the findings of this study are openly
+available at <a href="https://github.com/jisunjang19/cran-JSDNE" class="uri">https://github.com/jisunjang19/cran-JSDNE</a> or doi:
+10.5281/zenodo.12708779. This estimates age using three functions which
+offers the high levels of accuracy (91-92.9%). This method does not
+require a great degree of experience to gather and interpret the
+results, only familiarity with R studio and access to a laser scanner.
+Moreover, the results can be applied to research in bioarchaeology and
+forensic anthropology.</p>
+</div>
+<div id="acknowledgements" class="section level3">
+<h3>Acknowledgements</h3>
 <p>We would like to appreciate to Dr. Maria Susana De Jesus Garcia with
 the Luís Lopes Skeletal Collection, curated by the National Museum of
 Natural History and Science (MUHNAC), in Lisbon, Portugal, Dr. Maria
@@ -829,7 +880,11 @@ curated at the University of Coimbra, in Portugal, Dr. Mirko Mattia and
 Dr. Cristina Cattaneo with the CAL Milano Cemetery Skeletal Collection,
 curated at the University of Milan, in Italy, allowing to access the
 collections.</p>
-<p>###Code Summary #### <code>PCQDA_result()</code></p>
+</div>
+<div id="code-summary" class="section level3">
+<h3>Code Summary</h3>
+<div id="pcqda_result" class="section level4">
+<h4><code>PCQDA_result()</code></h4>
 <p>PCQDA method involves four age phases: age phase 1 (age range:20-44),
 age phase 2 (age range:31-74), age phase 3 (age range:63-93), and age
 phase (age range: over 76). The result is the estimated age phase and
@@ -849,6 +904,7 @@ range.</p>
 <span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co">#&gt; Total Surface DNE = 209.9028 </span></span>
 <span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co">#&gt; Convex DNE= 140.7082 </span></span>
 <span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a><span class="co">#&gt; Concave DNE= 69.19456</span></span></code></pre></div>
+</div>
 <div id="pcr_result" class="section level4">
 <h4><code>PCR_result()</code></h4>
 <p>PCR method estimates the age as the regression analysis. The result
@@ -890,6 +946,7 @@ range.</p>
 <span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a><span class="co">#&gt; Total Surface DNE = 209.9028 </span></span>
 <span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a><span class="co">#&gt; Convex DNE= 140.7082 </span></span>
 <span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a><span class="co">#&gt; Concave DNE= 69.19456</span></span></code></pre></div>
+</div>
 </div>
 
 

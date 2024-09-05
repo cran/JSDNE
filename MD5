@@ -1,4 +1,4 @@
-cd895a463f6a81441384923ecc667623 *DESCRIPTION
+42c8a9eee62ea251c0a2c09fb11ba786 *DESCRIPTION
 1e07ad9b199dc2a1a52dbdd9986f77b9 *NAMESPACE
 f003b911f55437ea00553b3f095e02ab *R/Apex.R
 1ec9f82970fa58e0b02e6999d931e44c *R/JSDNE-package.R
@@ -25,8 +25,8 @@ f6ceac7a2c371d4bad9ce3720bf70599 *data/PCQDA_Test.rda
 b7b8f80c86023dfc9fdc69441107a97e *data/RawData.rda
 1b7f1867c2cb1170fca98895491793b8 *data/WholeSurface.rda
 c75b0d858b7bfced49ca3b6426c1a7b1 *inst/doc/introduction.R
-5b95dd7ca422de2ee756a242fc600373 *inst/doc/introduction.Rmd
-52e0343d00e959f6a4405f0bf06db792 *inst/doc/introduction.html
+04501b2a547449f433f4564c09c199b6 *inst/doc/introduction.Rmd
+de813be7cf4b899a51a98df7eb2926dc *inst/doc/introduction.html
 1c94b6fb2a895c95b904f6b5fad19594 *man/Apex.Rd
 58c7805f9e01e7de587d49ffff5219f9 *man/JSDNE-package.Rd
 7c94fe26ce87854370f0b87d84cb7dc7 *man/PCLR_Test.Rd
@@ -40,4 +40,4 @@ baaa027956a3a0e0b02021007a548ec6 *man/PCQDA_result.Rd
 d0ad3523fa6a31c7546b0ae0bdf816db *man/PCR_result.Rd
 1b19e5769281334486917b73067b6f2d *man/RawData.Rd
 3e5fb810d87b52df4961ac544f038708 *man/WholeSurface.Rd
-5b95dd7ca422de2ee756a242fc600373 *vignettes/introduction.Rmd
+04501b2a547449f433f4564c09c199b6 *vignettes/introduction.Rmd

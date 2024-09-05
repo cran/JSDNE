@@ -1,6 +1,6 @@
 Package: JSDNE
 Title: Estimating the Age using Auricular Surface by DNE
-Version: 4.3.4
+Version: 4.4.4
 Authors@R: 
     person("Jisun", "Jang", email="jisun.jang.19@ucl.ac.uk", role = c("aut", "cre"))
 Maintainer: Jisun Jang <jisun.jang.19@ucl.ac.uk>
@@ -14,7 +14,7 @@ Imports: dplyr, MASS, molaR, nnet, Rvcg
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2024-07-10 22:02:40 UTC; jangj
+Packaged: 2024-09-04 21:50:33 UTC; jangj
 Author: Jisun Jang [aut, cre]
 Repository: CRAN
-Date/Publication: 2024-07-10 22:20:02 UTC
+Date/Publication: 2024-09-05 00:50:02 UTC
